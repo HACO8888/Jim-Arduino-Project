@@ -114,7 +114,7 @@ void loop()
   {
     timeSet -= 1;
     delay(1000);
-    if (timeSet == 0)
+    if (timeSet < 0)
     {
       digitalWrite(Buz, HIGH);
       delay(1000);
