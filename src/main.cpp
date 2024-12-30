@@ -66,6 +66,30 @@ void loop()
     }
   }
 
+  if (digitalRead(SETBtn) == LOW)
+  {
+    if (timeSet == 0)
+    {
+      digitalWrite(Buz, HIGH);
+      delay(500);
+      digitalWrite(Buz, LOW);
+      timeSet = time * 60;
+    }
+  }
+
+  if (timeSet > 0)
+  {
+    timeSet -= 1;
+    delay(1000);
+    if (timeSet == 0)
+    {
+      digitalWrite(Buz, HIGH);
+      delay(1000);
+      digitalWrite(Buz, LOW);
+      timeSet = 0;
+    }
+  }
+
   DateTime now = rtc.now();
   CDSVal = analogRead(CDSPin);
   // Serial.println(CDSVal);
@@ -97,29 +121,5 @@ void loop()
     lcd.print(timeSet);
     lcd.print("s");
     lcd.print("   ");
-  }
-
-  if (digitalRead(SETBtn) == LOW)
-  {
-    if (timeSet == 0)
-    {
-      digitalWrite(Buz, HIGH);
-      delay(500);
-      digitalWrite(Buz, LOW);
-      timeSet = time * 60;
-    }
-  }
-
-  if (timeSet > 0)
-  {
-    timeSet -= 1;
-    delay(1000);
-    if (timeSet < 0)
-    {
-      digitalWrite(Buz, HIGH);
-      delay(1000);
-      digitalWrite(Buz, LOW);
-      timeSet = 0;
-    }
   }
 }
